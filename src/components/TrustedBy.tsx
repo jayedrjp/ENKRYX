@@ -1,13 +1,13 @@
 const LOGOS = [
-  "/public/logos/logo1.png",
-  "/public/logos/logo2.png",
-  "/public/logos/logo3.png",
-  "/public/logos/logo4.png",
-  "/public/logos/logo5.png",
-  "/public/logos/logo6.png",
-  "/public/logos/logo7.png",
-  "/public/logos/logo8.png",
-  "/public/logos/logo9.png",
+  "/logos/logo1.png",
+  "/logos/logo2.png",
+  "/logos/logo3.png",
+  "/logos/logo4.png",
+  "/logos/logo5.png",
+  "/logos/logo6.png",
+  "/logos/logo7.png",
+  "/logos/logo8.png",
+  "/logos/logo9.png",
 ];
 
 export default function TrustedBy() {
@@ -33,7 +33,7 @@ export default function TrustedBy() {
             >
               <img
                 src={src}
-                alt="Partner logo"
+                alt={`Partner logo ${(i % LOGOS.length) + 1}`}
                 className="object-contain h-full w-full"
                 loading="lazy"
               />
@@ -51,11 +51,13 @@ export default function TrustedBy() {
             transform: translateX(-25%);
           }
         }
+
         .marquee-track {
           width: max-content;
           display: flex;
           animation: marquee-scroll 40s linear infinite;
         }
+
         .marquee-track:hover {
           animation-play-state: paused;
         }
