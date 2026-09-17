@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NOTE: native `scroll-behavior: smooth` is intentionally omitted here.
+   ScrollStack (Services section) drives window scroll via Lenis for its
+   pin/stack animation; combining native CSS smooth-scroll with Lenis's
+   JS-driven smooth scroll causes the two to fight and produces jitter. */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fcfdfe;
+  color: #071827;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* visible keyboard focus states for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #006e87;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* scroll-reveal utility, toggled by IntersectionObserver in App.tsx */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hero animation stage — single scene, enters from the right, exits left */
+@keyframes heroSceneEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(64px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes heroSceneExit {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-36px) scale(0.97);
+  }
+}
+
+.hero-scene-enter {
+  animation: heroSceneEnter 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-scene-exit {
+  animation: heroSceneExit 450ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
